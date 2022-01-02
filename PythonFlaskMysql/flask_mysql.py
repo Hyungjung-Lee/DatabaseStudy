@@ -7,6 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/get', methods=['GET'])
 def get():
+    limit = request.args.get('limit')
     cursor = class_db.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM customers"
     cursor.execute(sql)
