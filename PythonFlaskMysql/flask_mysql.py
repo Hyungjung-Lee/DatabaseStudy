@@ -17,11 +17,10 @@ def get():
 @app.route('/new', methods=['POST'])
 def post():
     data = request.json
-    print(data)
     cursor = class_db.cursor(pymysql.cursors.DictCursor)
     sql = '''INSERT INTO customers (customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country)  VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'''
     cursor.execute(sql, (data['customerNumber'], data['customerName'], data['contactLastName'], data['contactFirstName'], data['phone'], data['addressLine1'], data['addressLine2'], data['city'], data['state'], data['postalCode'], data['country']))
-
+    class_db.commit()
     return jsonify(data)
 
 
