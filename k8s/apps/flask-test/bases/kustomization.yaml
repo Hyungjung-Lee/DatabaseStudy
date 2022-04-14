@@ -1,0 +1,9 @@
+namespace: study
+
+commonLabels:
+  service: flask
+  component: study
+
+resources:
+  - deployment.yaml
+  - service.yaml

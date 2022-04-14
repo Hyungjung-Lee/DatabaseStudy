@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: flask
+    app.kubernetes.io/part-of: study
+  name: study-flask
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flask
+      app.kubernetes.io/part-of: study
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: flask
+        app.kubernetes.io/part-of: study
+    spec:
+      containers:
+        - image: docker.io/lhj5772/flask_image_x86:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          name: study-flask
+          ports:
+            - containerPort: 8000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 5

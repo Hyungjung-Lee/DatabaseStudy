@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: study-flask
+spec:
+  replicas: 2
+  spec:
+  template:
+    spec:
+      containers:
+        - name: study-flask
+          image: docker.io/lhj5772/flask_image_x86:latest
+          env:
+            - name: PHASE
+              value: ALPHA
